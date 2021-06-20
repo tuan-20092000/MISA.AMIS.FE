@@ -463,6 +463,8 @@ const axios = require("axios");
           return "Nữ";
         case 2:
           return "Khác";
+        default:
+          return "";
       }
     },
 
