@@ -286,6 +286,7 @@
                   ref="bankBranchName"
                   type="text"
                   name="BankBranchName"
+                  maxlength="10"
                 />
               </div>
             </div>
@@ -696,6 +697,10 @@ export default {
 
     // hàm validate object trước khi thực hiện lưu
     validateObject() {
+      $('.input-normal').each(function(){
+        var maxlength = $(this).attr('maxlength');
+        console.log(maxlength);
+      });
       let me = this;
       // validate mã nhân viên
       var code_regex = /^NV-/i;
@@ -743,6 +748,8 @@ export default {
         me.messageContent = "Email không hợp lệ, vui lòng nhập lại.";
         return false;
       }
+
+      
 
       return true;
     },
@@ -913,5 +920,5 @@ export default {
 };
 </script>
 
-<style src="../css/employeedetail.css"></style>
+<style scope src="../css/employeedetail.css"></style>
 <style src="../css/googlefont.css"></style>

@@ -3,8 +3,8 @@
     class="main"
     @keyup.up.exact="arrowUp()"
     @keyup.down.exact="arrowDown()"
-    @keydown.ctrl.192.exact="addEmployee()"
-    @keydown.delete.exact="showWarning()"
+    @keydown.ctrl.shift.prevent.stop.exact="addEmployee()"
+    @keydown.ctrl.enter.exact="edit()"
     @click="clickMain($event)"
   >
     <div class="main-title">
@@ -15,7 +15,7 @@
             <span style="padding-right:4px;">Tiện ích</span
             ><img src="../Resource/img/drop_down.svg" alt="" />
           </button>
-          <button v-on:click="addEmployee()" class="btn-add"><span>Thêm</span></button>
+          <button v-on:click="addEmployee()" class="btn-add" title="Thêm (Ctrl + Shift)"><span>Thêm</span></button>
           <button class="btn-excel">
             <div class="div-img-drop-down">
               <img src="../Resource/img/drop_down_white.svg" alt="" />
@@ -43,7 +43,9 @@
               autofocus
               autocomplete="off"
             />
-            <img src="../Resource/img/find.svg" alt="search" />
+            <div style="background-color: #fff;width:32px;32px;">
+              <img src="../Resource/img/find.svg" alt="search" />
+            </div>
           </div>
           <div class="three-btn">
             <img

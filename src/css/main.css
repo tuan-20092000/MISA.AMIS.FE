@@ -18,7 +18,7 @@
   }  
 
   .main-title {
-    padding: 24px 50px 24px 0; 
+    padding: 24px 51px 24px 0; 
     position: absolute;
     top: 0;
     height: 100px;
@@ -152,13 +152,13 @@
   .search-name-id{
     display: inline-flex;
     position: relative;
+    border: 1px solid #babec5;
   }
   
   .search-name-id input{
-    width: 240px;
+    width: 10vw;
     height: 36px;
     outline: none;
-    border: 1px solid #babec5;
     padding: 6px 10px;
   }
   

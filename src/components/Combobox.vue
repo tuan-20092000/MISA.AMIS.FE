@@ -251,7 +251,7 @@ export default {
 
         handleBlur(e){  
             this.$el.firstElementChild.classList.remove("active");
-            this.hideForm();
+            // this.hideForm();
             if(this.selectValue.text == null || this.selectValue.text==""){
                 this.valid = false;
                 this.$el.firstElementChild.setAttribute("title", 'Trường này không được để trống');

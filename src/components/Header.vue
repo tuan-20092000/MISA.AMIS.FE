@@ -14,7 +14,9 @@
 
     <div class="div-search">
       <input type="text" placeholder="Nhập từ khóa tìm kiếm" />
-      <img src="../Resource/img/find.svg" alt="search" />
+      <div style="background-color: #fff;width:32px;32px;">
+        <img src="../Resource/img/find.svg" alt="search" />
+      </div>
     </div>
 
     <div class="header-menu-icon">
