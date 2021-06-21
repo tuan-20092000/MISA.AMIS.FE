@@ -7,6 +7,8 @@
     @keydown.ctrl.shift.83.prevent.stop.exact="saveAndAdd()"
     @click="clickForm($event)"
   >
+
+    <!-- button help and cancel form -->
     <div class="form-detail" id="form-detail">
       <div class="div-tool">
         <img src="../Resource/img/support.svg" alt="" title="Giúp (F1)" />
@@ -14,6 +16,8 @@
           <img src="../Resource/img/x.svg" alt="" title="Đóng (ESC)" />
         </div>
       </div>
+
+      <!-- title-formdetail -->
       <div class="form-header">
         <div class="form-title">Thông tin nhân viên</div>
       </div>
@@ -29,6 +33,9 @@
                     id="btn-first"
                     @keyup.shift.tab.exact="shiftTab()"
                   ></button>
+
+                  <!-- main-content-formdetail -->
+                  <!-- input mã nhân viên -->
                   <label for="EmployeeCode"
                     >Mã<span style="color: red"> *</span></label
                   >
@@ -45,6 +52,8 @@
                     required="true"
                   />
                 </div>
+
+                <!-- input họ tên -->
                 <div class="employeeName flex-col">
                   <label for="employeeName"
                     >Tên<span style="color: red"> *</span></label
@@ -63,6 +72,8 @@
                   />
                 </div>
               </div>
+
+              <!-- input tên đơn vị -->
               <div class="row-input flex-col">
                 <label for="departmentName"
                   >Đơn vị<span style="color: red"> *</span></label
@@ -75,6 +86,8 @@
                   :height="32"
                 />
               </div>
+
+              <!-- input chức danh nhân viên -->
               <div class="row-input flex-col">
                 <label for="employeePosition">Chức danh</label>
                 <input
@@ -88,6 +101,8 @@
                 />
               </div>
             </div>
+
+            <!-- input ngày sinh -->
             <div class="form-content-right">
               <div class="row-input">
                 <div class="DateOfBirth flex-col" id="picker_dateofbirth">
@@ -121,6 +136,8 @@
                     </v-date-picker>
                   </div>
                 </div>
+
+                <!-- input giới tính -->
                 <div class="Gender flex-col">
                   <div class="label-gender" style="line-height: 16px">
                     Giới tính
@@ -153,6 +170,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- input số CMND -->
               <div class="row-input">
                 <div class="EntityCard flex-col">
                   <label for="identityNumber">Số CMND</label>
@@ -166,6 +185,8 @@
                     maxlength="12"
                   />
                 </div>
+
+                <!-- input ngày cấp -->
                 <div class="DateSupply flex-col" id="picker_identitydate">
                   <label for="identitydate">Ngày cấp</label>
                   <div class="input-date" style="margin-top: 5px">
@@ -205,6 +226,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- input nơi cấp CMND -->
               <div class="row-input flex-col">
                 <label for="identityPlace">Nơi cấp</label>
                 <input
@@ -219,6 +242,8 @@
               </div>
             </div>
           </div>
+
+          <!-- input địa chỉ -->
           <div class="form-content-bottom">
             <div class="row-input flex-col">
               <label for="addresss">Địa chỉ</label>
@@ -232,6 +257,8 @@
                 maxlength="255"
               />
             </div>
+
+            <!-- input ĐT di động -->
             <div class="row-input">
               <div class="PhoneNumber div-normal">
                 <label for="phoneNumber">ĐT di động</label>
@@ -245,6 +272,8 @@
                   maxlength="13"
                 />
               </div>
+
+              <!-- input ĐT cố định -->
               <div class="TelephoneNumber div-normal">
                 <label for="telephoneNumber">ĐT cố định</label>
                 <input
@@ -257,6 +286,8 @@
                   maxlength="13"
                 />
               </div>
+
+              <!-- input email -->
               <div class="Email div-normal">
                 <label for="email">Email</label>
                 <input
@@ -270,6 +301,8 @@
                 />
               </div>
             </div>
+
+            <!-- input tài khoản ngân hàng -->
             <div class="row-input">
               <div class="BankAccountNumber div-normal">
                 <label for="bankAccountNumber">Tài khoản ngân hàng</label>
@@ -283,6 +316,8 @@
                   maxlength="20"
                 />
               </div>
+
+              <!-- input tên ngân hàng -->
               <div class="BankName div-normal">
                 <label for="bankName">Tên ngân hàng</label>
                 <input
@@ -295,6 +330,8 @@
                   maxlength="255"
                 />
               </div>
+
+              <!-- input tên chi nhánh -->
               <div class="BankBranchName div-normal">
                 <label for="bankBranchName">Tên chi nhánh</label>
                 <input
@@ -311,6 +348,8 @@
           </div>
         </div>
       </div>
+
+      <!-- footer form detail -->
       <div class="form-footer">
         <div class="div-line"></div>
         <button v-on:click="preCancelForm()" class="btn-cancel btn-primary">
@@ -336,6 +375,8 @@
         </div>
       </div>
     </div>
+
+    <!-- div loading -->
     <div v-if="loading" class="wrap-loading">
       <div class="loading" style="width: fit-content; height: 32px">
         <img style="" src="../Resource/loading.svg" alt="" />
@@ -390,8 +431,9 @@ export default {
 
       identityDate_PK: null, // ngày sinh để v-model với date picker
 
-      loading: false,
+      loading: false, // ẩn hiện loading
 
+      // dữ liệu truyền vào combobox
       dataCbx: [
                 { text: 'Phòng nhân sự', value: 0 },
                 { text: 'Phòng kinh doanh', value: 1 },
@@ -407,6 +449,7 @@ export default {
 
   methods: {
     // hàm mở form
+    // Createdby TuanNV (18/6/2021)
     showForm() {
       // mở form
       this.showFormDetail = true;
@@ -416,6 +459,7 @@ export default {
     },
 
     // hàm focus và bôi đen text trong input nếu có
+    // Createdby TuanNV (18/6/2021)
     focusAndSelectAll(index) {
       if (!index || index == "employeeCode") {
         this.$nextTick(function () {
@@ -487,6 +531,7 @@ export default {
     },
 
     // hàm tắt form detail
+    // Createdby TuanNV (18/6/2021)
     cancelFormDetail() {
       this.showFormDetail = false;
       this.showIdentityDate = false;
@@ -498,6 +543,7 @@ export default {
 
     // kiểm tra xem dữ liệu đã thay đổi hay chưa, nếu đã thay đổi thì hiện message thông báo,
     // nếu chưa thì thực hiện đóng form
+    // Createdby TuanNV (18/6/2021)
     preCancelForm() {
       let employee1 = JSON.stringify(this.cEmployee);
       let employee2 = JSON.stringify(this.employee);
@@ -509,6 +555,7 @@ export default {
     },
 
     //hàm reset form
+    // Createdby TuanNV (18/6/2021)
     resetForm() {
       // null employee
       let nullEmployee = {
@@ -534,6 +581,7 @@ export default {
     },
 
     // hàm lưu và tắt form
+    // Createdby TuanNV (18/6/2021)
     save() {
       let me = this;
       if (me.checkInputRequired() && me.validateObject()) {
@@ -547,6 +595,7 @@ export default {
     },
 
     // hàm lưu và thêm mới
+    // Createdby TuanNV (18/6/2021)
     saveAndAdd() {
       let me = this;
       if (me.checkInputRequired() && me.validateObject()) {
@@ -560,6 +609,7 @@ export default {
     },
 
     // chuyển đôi các trường cần thiết trước khi gửi tới server
+    // Createdby TuanNV (18/6/2021)
     convertPreSend() {
       let me = this;
       let employee = { ...me.employee };
@@ -592,6 +642,7 @@ export default {
     },
 
     // xử lý request tới server (thêm mới hay sửa chữa?)
+    // Createdby TuanNV (18/6/2021)
     handleRequest(e) {
       let me = this;
       // xử lý (ngày tháng) trước khi gửi
@@ -668,6 +719,7 @@ export default {
     },
 
     // xử lý sự kiên blur trên các input required
+    // Createdby TuanNV (18/6/2021)
     handleBlur(e) {
       let value = e.target.value;
       let id = e.target.id;
@@ -684,6 +736,7 @@ export default {
 
     // hàm kiểm tra các input required có dữ liệu hay chưa
     // trả về true nếu đã đủ, false nếu có ít nhất 1 input chưa có
+    // Createdby TuanNV (18/6/2021)
     checkInputRequired() {
       let check = true;
       let me = this;
@@ -703,6 +756,7 @@ export default {
     },
 
     // hàm chuyển đổi tên trường thành tiếng việt
+    // Createdby TuanNV (18/6/2021)
     convertToVNese(fieldName) {
       switch (fieldName) {
         case "employeeCode":
@@ -741,6 +795,7 @@ export default {
     },
 
     // hàm validate object trước khi thực hiện lưu
+    // Createdby TuanNV (18/6/2021)
     validateObject() {
       let me = this;
       // validate mã nhân viên
@@ -820,6 +875,7 @@ export default {
     },
 
     // hàm validate email
+    // Createdby TuanNV (18/6/2021)
     validateEmail(email) {
       if (email == "" || email == null) return true;
       var reg_email =
@@ -828,6 +884,7 @@ export default {
     },
 
     // hàm validate ngày tháng
+    // Createdby TuanNV (18/6/2021)
     validateDate(date) {
       if (date == "" || date == null) return true;
       var date_regex =
@@ -836,15 +893,16 @@ export default {
     },
 
     // chuyển kiểu ngày từ yyyy-mm-dd sang dd/mm/yyyy
+    // Createdby TuanNV (18/6/2021)
     formatDate(e) {
       if (!this.employee.dateOfBirth) return null;
 
       const [year, month, day] = this.employee.dateOfBirth.split("-");
       this.employee.dateOfBirth = `${day}/${month}/${year}`;
-      // return `${month}/${day}/${year}`
     },
 
     // hàm trả về ngày hiện tại dd/mm/yyyy
+    // Createdby TuanNV (18/6/2021)
     getCurrentDay() {
       let today = new Date(),
         dd = String(today.getDate()).padStart(2, "0"),
@@ -854,16 +912,19 @@ export default {
     },
 
     // sự kiện khi ấn tab
+    // Createdby TuanNV (18/6/2021)
     tab() {
       this.$refs.employeeCode.focus();
     },
 
     // sự kiện khi ấn shift tab
+    // Createdby TuanNV (18/6/2021)
     shiftTab() {
       this.$refs.saveAndAdd.focus();
     },
 
     // sự kiện khi chọn date ở date-picker ngày sinh
+    // Createdby TuanNV (18/6/2021)
     chooseDateOfBirth() {
       let [year, month, day] = this.dateOfBirth_PK.split("-");
       this.employee.dateOfBirth = `${day}/${month}/${year}`;
@@ -871,6 +932,7 @@ export default {
     },
 
     // sự kiện khi chọn date ở date-picker ngày cấp
+    // Createdby TuanNV (18/6/2021)
     chooseIdentityDate() {
       let [year, month, day] = this.identityDate_PK.split("-");
       this.employee.identityDate = `${day}/${month}/${year}`;
@@ -878,6 +940,7 @@ export default {
     },
 
     // sự kiện click vào form để ẩn các popup
+    // Createdby TuanNV (18/6/2021)
     clickForm(e) {
       var picker_dateofbirth = document.getElementById("picker_dateofbirth");
       if (picker_dateofbirth != null) {
@@ -895,11 +958,13 @@ export default {
     },
 
     // binding đơn vị khi người dùng chọn ở combobox
+    // Createdby TuanNV (18/6/2021)
     selectDepartment(departmentName) {
       this.employee.departmentName = departmentName;
     },
 
     // chuyển từ dd/mm/yyyy sang yyyy-mm-dd để gửi tới server
+    // Createdby TuanNV (18/6/2021)
     convertToDateServer(date) {
       var [day, month, year] = date.split("/");
       if (
@@ -912,6 +977,7 @@ export default {
     },
 
     // hàm tăng mã nhân viên lớn nhất trong csdl thêm 1
+    // Createdby TuanNV (18/6/2021)
     async increaseCode() {
       let url = "http://localhost:8080/api/v1/Employees/GetMaxCode";
       let maxCode = "";
@@ -931,6 +997,7 @@ export default {
     },
   },
 
+  // khởi tạo xong thì thực hiện trước tăng mã nhân viên lớn nhất lên 1
   created() {
     this.increaseCode();
   },
@@ -938,6 +1005,7 @@ export default {
   mounted() {
     let me = this;
     // bắt sự kiện nhấn phím sửa thông tin nhân viên
+    // Createdby TuanNV (18/6/2021)
     EventBus.$on("editEmployee", (employee) => {
       if (employee != null) {
         me.employee = { ...employee };
@@ -948,6 +1016,7 @@ export default {
 
     // bắt sự kiên thêm mới hoặc clone nhân viên nhân viên
     // nếu là clone thì nhận được 1 employee đầu vào
+    // Createdby TuanNV (18/6/2021)
     EventBus.$on("addEmployee", async (employee) => {
       if (employee != undefined) {
         let newCode = me.employee.employeeCode;
@@ -959,17 +1028,20 @@ export default {
     });
 
     // bắt sự kiện focus và chọn hết nếu có trong ô nhập liệu
+    // Createdby TuanNV (18/6/2021)
     EventBus.$on("focusAndSelectAll", (field) => {
       me.focusAndSelectAll(field);
     });
 
     // bắt sự kiện đóng form detail
+    // Createdby TuanNV (18/6/2021)
     EventBus.$on("cancelFormDetail", () => {
       this.cancelFormDetail();
     });
   },
 
   // cập nhật ngày tháng trong input date và date picker nếu 1 trong 2 thay đổi
+  // Createdby TuanNV (18/6/2021)
   updated: function () {
     this.$nextTick(function () {
       if (!this.employee.dateOfBirth) return null;

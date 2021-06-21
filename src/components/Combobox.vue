@@ -104,6 +104,7 @@ export default {
 
     methods:{
         // hàm xử lý khi nhấn nút xuống
+        // Createdby TuanNV (18/6/2021)
         moveDown(){
             let me = this;
             // chuyển dòng đang được đánh dấu lên trên
@@ -111,7 +112,9 @@ export default {
                 this.rowMarked++;
             }
         },
+
         // hàm xử lý khi nhấn nút lên
+        // Createdby TuanNV (18/6/2021)
         moveUp(){
             let me = this;
             // chuyển dòng đang được đánh dấu lên trên
@@ -120,6 +123,9 @@ export default {
             }
             
         },
+
+        // hàm ẩn hiện các option
+        // Createdby TuanNV (18/6/2021)
         toggleSelect(){
             this.dataShow = this.cacheData;
             this.isShow=!this.isShow;
@@ -127,7 +133,9 @@ export default {
                 this.$el.getElementsByClassName("row-current")[0].classList.remove("row-current");
             this.$refs.departmentName.focus();
         },
+
         // hàm xử lý khi nhấn enter
+        // Createdby TuanNV (18/6/2021)
         selectedByEnter(){
             let me = this;
             // nếu có 1 dòng đã được đánh dấu
@@ -155,21 +163,32 @@ export default {
             }
         },
 
+        // hàm focus vài input nhập liệu 
+        // Createdby TuanNV (18/6/2021)
         focusInput(){
             document.getElementById("wrap-input-cbx").classList.add("active");
         },
 
+        // hàm lấy ra giá trị số đang được chọn
+        // Createdby TuanNV (18/6/2021)
         getValue(){
             return this.selectValue.value;
         },
+
+        // hàm lấy ra giá trị text đang được chọn
+        // Createdby TuanNV (18/6/2021)
         getText(){
             return this.selectValue.text;
         },
+
         // ẩn form đi
+        // Createdby TuanNV (18/6/2021)
         hideForm(){
             this.isShow = false;
         },
+
         // lựa chọn 1 giá trị
+        // Createdby TuanNV (18/6/2021)
         select(value){
             let me = this;
             me.selectValue = {...value};
@@ -180,6 +199,7 @@ export default {
             me.$emit('selectDepartment', me.selectValue.text);
         },
         // chuyển từ tiếng việt có dấu sang không dấu
+        // Createdby TuanNV (18/6/2021)
         fomatText(str){
             str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
             str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
@@ -206,6 +226,7 @@ export default {
             return str;
         },
         // tìm kiếm các giá trị khớp với text trong combobox
+        // Createdby TuanNV (18/6/2021)
         search(){;
             // chuyển từ khóa tìm kiếm về chữ thường
             let value = this.selectValue.text.toLowerCase();
@@ -223,14 +244,23 @@ export default {
             }
             
         },
+
+        // hàm xác định input chưa thỏa mãn
+        // Createdby TuanNV (18/6/2021)
         valueInvalid(){
             this.valid = false;
             this.$el.firstElementChild.setAttribute("title", 'Trường thông tin nhập không hợp lệ')
         },
+
+        // hàm xác định input đã thỏa mãn
+        // Createdby TuanNV (18/6/2021)
         valueValid(){
             this.$el.firstElementChild.removeAttribute('title');
             this.valid = true;
         },
+
+        // hàm kiểm tra xem có option nào trùng hay chưa, trùng thì set option
+        // Createdby TuanNV (18/6/2021)
         checkValue(){
             let valueCheck = this.selectValue.text;
             for (let index = 0; index < this.dataShow.length; index++) {
@@ -244,11 +274,15 @@ export default {
             }
             this.valueInvalid();
         },
-
+        
+        // hàm reset lại input combobox
+        // Createdby TuanNV (18/6/2021)
         reset(){
             this.selectValue = {};
         },
 
+        // xử lý khi blur khỏi combobox
+        // Createdby TuanNV (18/6/2021)
         handleBlur(e){  
             this.$el.firstElementChild.classList.remove("active");
             // this.hideForm();
@@ -261,6 +295,8 @@ export default {
         },
     },
 
+    // show option khi input rỗng
+    // Createdby TuanNV (18/6/2021)
     updated(){
         if(this.selectValue.text == ''){
             this.dataShow = this.cacheData;

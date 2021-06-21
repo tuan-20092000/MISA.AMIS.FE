@@ -1,5 +1,6 @@
 <template>
     <div class="container-box">
+        <!-- message box cảnh báo trước khi xóa -->
         <div v-if="warning" class="wrap-message-form">
             <div class="message-box">
                 <div class="div-content">
@@ -18,6 +19,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- message box cảnh báo lỗi tới người dùng -->
         <div v-if="error" class="wrap-message-form">
             <div class="message-box">
                 <div class="div-content">
@@ -35,6 +38,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- message cảnh báo dữ liệu đã thay đổi tới người dùng trước khi đóng form detail -->
         <div v-if="warningDataChange" class="wrap-message-form">
             <div class="message-box">
                 <div class="div-content">
@@ -52,6 +57,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- message box thông báo thao tác thành công tới người dùng -->
         <div v-if="successBox" class="success-box">
             <div style="height: 36px;display:flex;flex-direction:row;margin-bottom:25px;">
                 <div style="height:100%; width:36px;">
@@ -78,8 +85,8 @@ export default {
             error: false, // ẩn hiện box báo lỗi
             field: null, // trường cần focus sau khi tắt message-box
             warningDataChange: false, //ẩn hiện message box cảnh báo khi tắt form detail nếu dữ liệu thay đổi
-            successBox: false,
-            successMode: null,
+            successBox: false, // ẩn hiện success box
+            successMode: null, // mode của success box (xóa hay sửa, thêm thành công)
 
             // nhân viên hiển thị trên form warning
             employee : {
@@ -105,11 +112,13 @@ export default {
 
     methods:{
         // hàm đóng message box
+        // Createdby TuanNV (18/6/2021)
         cancelMessageBox(){
             this.warning = false;
         },
 
         // tắt form báo lỗi
+        // Createdby TuanNV (18/6/2021)
         cancelErrorBox(){
             this.error = false;
             if(this.field !=null){
@@ -119,18 +128,21 @@ export default {
         },
 
         // hàm hiện hộp cảnh báo
+        // Createdby TuanNV (18/6/2021)
         showWarning(employee){
             this.employee = {...employee};
             this.warning = true;
         },
 
         // hàm emit xóa nhân viên
+        // Createdby TuanNV (18/6/2021)
         deleteEmployee(){
             EventBus.$emit("deleteEmployee", this.employee);
             this.warning = false;
         },
         
         // hàm hiển thị message box thông báo lỗi
+        // Createdby TuanNV (18/6/2021)
         showError(message, field){
             this.messageContent = message;
             this.error = true;
@@ -141,11 +153,14 @@ export default {
         },
 
         // hàm emit tắt form detail
+        // Createdby TuanNV (18/6/2021)
         cancelFormDetail(){
             this.warningDataChange = false;
             EventBus.$emit("cancelFormDetail");
         },
 
+        // hàm hiện success box
+        // Createdby TuanNV (18/6/2021)
         showSuccessBox(){
             this.successBox = true;
             setTimeout(()=>
@@ -154,10 +169,13 @@ export default {
         },
 
         // hàm tắt success box
+        // Createdby TuanNV (18/6/2021)
         cancelSuccessBox(){
             this.successBox = false;
         },
 
+        // hàm hiện warning box
+        // Createdby TuanNV (18/6/2021)
         showWarningDataChange(){
             this.warningDataChange = true;
             setTimeout(() =>

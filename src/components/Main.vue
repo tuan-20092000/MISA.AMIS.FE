@@ -8,6 +8,8 @@
     @keydown.ctrl.shift.enter.exact="cloneEmployee()"
     @click="clickMain($event)"
   >
+
+    <!-- title main content -->
     <div class="main-title">
       <div class="main-title-content">
         <div class="title">Nhân viên</div>
@@ -25,6 +27,8 @@
         </div>
       </div>
     </div>
+
+    <!-- controller -->
     <div class="layout">
       <div class="grid">
         <div class="excution">
@@ -67,6 +71,8 @@
           </div>
         </div>
       </div>
+
+      <!-- table employee -->
       <div class="" id="ms-component-table">
         <div class="wrap-table" id="wrap_table">
           <div class="ms-table">
@@ -189,6 +195,8 @@
               </tbody>
             </table>
           </div>
+
+          <!-- footer table -->
           <div class="wrap-footer">
             <div class="footer-content">
               <div class="count-record">
@@ -236,6 +244,8 @@
       </div>
     </div>
     <div class="div-left-30"></div>
+
+    <!-- popup option -->
     <div
       v-if="showOption"
       :style="{ left: xClick + 'px', top: yClick + 'px' }"
@@ -255,7 +265,6 @@
 
 <script>
 import EventBus from "./../main.js";
-import excel from 'vue-excel-export';
 const axios = require("axios");
  export default {
   data() {
@@ -275,12 +284,13 @@ const axios = require("axios");
       ],
 
       showOption: false, // ẩn hiện option xóa, nhân bản
-      xClick: 0,
-      yClick: 0,
-      employee: null,
-      keySearch: "",
-      loading: true,
+      xClick: 0, // tọa độ x click chuột
+      yClick: 0, // tọa độ y click chuột
+      employee: null, // thông tin nhân viên
+      keySearch: "", // từ khóa tìm kiếm
+      loading: true, // ẩn hiện loading
 
+      // header excel export
       json_fields:{
         'Mã nhân viên': 'employeeCode',
         'Tên nhân viên': 'employeeName',
@@ -294,12 +304,14 @@ const axios = require("axios");
         'Chi nhánh ngân hàng': 'bankBranchName'
       },
 
+      // data excel export
       json_data: null,
     }
   },
 
   methods: {
     // lấy số lượng bản ghi theo từ khóa tìm kiếm
+    // Createdby TuanNV (18/6/2021)
     async getTotalRecord() {
       let me = this;
       this.loading = true;
@@ -332,6 +344,7 @@ const axios = require("axios");
     },
 
     // hàm lấy dữ liệu từ server
+    // Createdby TuanNV (18/6/2021)
     async getDataServer() {
       this.loading = true;
       let me = this;
@@ -366,6 +379,7 @@ const axios = require("axios");
     },
 
     // hàm xóa 1 nhân viên
+    // Createdby TuanNV (18/6/2021)
     async deleteEmployee(employee) {
       this.loading = true;
       let url = "http://localhost:8080/api/v1/Employees/" + employee.employeeId;
@@ -389,6 +403,8 @@ const axios = require("axios");
         });
     },
 
+    // hàm thực hiện lấy hết dữ liệu trước khi xuất ra excel
+    // Createdby TuanNV (18/6/2021)
     async getAllData(){
       let me = this;
       // bỏ khoảng trắng 2 đầu 
@@ -417,16 +433,19 @@ const axios = require("axios");
     },
 
     // hàm thêm mới nhân viên
+    // Createdby TuanNV (18/6/2021)
     addEmployee(){
       EventBus.$emit("addEmployee");
     },
 
     // sự kiện khi ấn vào các hàng
+    // Createdby TuanNV (18/6/2021)
     active(index) {
       this.selectedRow = index;
     },
 
     // sự kiện khi ấn sửa
+    // Createdby TuanNV (18/6/2021)
     edit(index) {
       let employee = null;
       if(index == undefined){
@@ -439,12 +458,14 @@ const axios = require("axios");
     },
 
     // hàm lấy dữ liệu từ server cho trang được chọn
+    // Createdby TuanNV (18/6/2021)
     getDataPage() {
       this.selectedRow = 0;
       this.getDataServer();
     },
 
     // hàm khi thay đổi số lượng nhân viên hiển thị trên 1 trang
+    // Createdby TuanNV (18/6/2021)
     changeCountPerPage() {
       this.selectedRow = 0;
       this.selectedPage = 1;
@@ -452,6 +473,7 @@ const axios = require("axios");
     },
 
     // hàm hiện popup option
+    // Createdby TuanNV (18/6/2021)
     showMoreOption(e, index) {
       this.xClick = e.clientX - 280;
       this.yClick = e.clientY - 40;
@@ -460,29 +482,34 @@ const axios = require("axios");
     },
 
     // hàm reload lại dữ liệu
+    // Createdby TuanNV (18/6/2021)
     refresh() {
       this.keySearch = "";
       this.getTotalRecord();
     },
 
     // hàm tìm kiếm từ
+    // Createdby TuanNV (18/6/2021)
     searchKeyWord(){
       this.getTotalRecord();
     },
 
     // sự kiện ấn mũi tên xuống
+    // Createdby TuanNV (18/6/2021)
     arrowDown() {
       if(this.selectedRow < this.countEmployeePerPage)
         this.selectedRow = this.selectedRow + 1;
     },
 
     // sự kiện ấn mũi tên lên
+    // Createdby TuanNV (18/6/2021)
     arrowUp(){
       if(this.selectedRow > 0)
         this.selectedRow = this.selectedRow - 1;
     },
 
     // show form cảnh báo trước khi xóa
+    // Createdby TuanNV (18/6/2021)
     showWarning() {
       let employee = {...this.employeeList[this.selectedRow]};
       EventBus.$emit("showWarning", employee);
@@ -490,6 +517,7 @@ const axios = require("axios");
     },
 
     // ẩn popup option nếu click ra ngoài
+    // Createdby TuanNV (18/6/2021)
     clickMain(e) {
       let component = document.getElementById("ms-component-table");
       if (component != null && this.showOption) {
@@ -500,6 +528,7 @@ const axios = require("axios");
     },
 
     // chuyển đổi ngày tháng năm từ server thành dd/mm/yyyy để hiển thị
+    // Createdby TuanNV (18/6/2021)
     convertDate(dateSrc) {
       if (dateSrc == null) return;
       let date = new Date(dateSrc),
@@ -510,6 +539,7 @@ const axios = require("axios");
     },
 
     // chuyển đổi kiểu giới tính để hiển thị
+    // Createdby TuanNV (18/6/2021)
     convertGender(gd) {
       switch (gd) {
         case 0:
@@ -524,6 +554,7 @@ const axios = require("axios");
     },
 
     // hàm nhân bản nhân viên
+    // Createdby TuanNV (18/6/2021)
     cloneEmployee() {
       let employee = { ...this.employeeList[this.selectedRow] };
       employee.dateOfBirth = this.convertDate(employee.dateOfBirth);
@@ -533,6 +564,7 @@ const axios = require("axios");
 
   },
 
+  // khởi tạo xong thì lấy dữ liệu
   created() {
     this.getTotalRecord();
   },
@@ -548,6 +580,7 @@ const axios = require("axios");
       this.deleteEmployee(employee);
     });
 
+    // lắng nghe sự kiến focus vào input tìm kiếm
     EventBus.$on("focusInputSearch", ()=>{
       if(this.$refs.inputSearch != undefined)
         this.$refs.inputSearch.focus();
