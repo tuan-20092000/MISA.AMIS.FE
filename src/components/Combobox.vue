@@ -10,7 +10,7 @@
                 v-on:input="search()" ref="departmentName"
                 name="departmentName"
                 autocomplete="off"
-                required>
+                required ="true">
             <div class="combo-select-show" v-on:click = "toggleSelect()">
                 <img src="../Resource/img/expland-more-small.svg" alt="">
             </div>

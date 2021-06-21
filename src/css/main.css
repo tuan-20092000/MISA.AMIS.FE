@@ -157,9 +157,13 @@
   
   .search-name-id input{
     width: 10vw;
-    height: 36px;
+    height: 32px;
     outline: none;
     padding: 6px 10px;
+  }
+
+  .search-name-id:focus-within{
+    border: 1px solid #2ca01c;
   }
   
   .search-name-id img{

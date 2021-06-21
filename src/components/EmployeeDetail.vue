@@ -40,7 +40,9 @@
                     ref="employeeCode"
                     type="text"
                     name="employeeCode"
-                    required
+                    minlength="4"
+                    maxlength="8"
+                    required="true"
                   />
                 </div>
                 <div class="employeeName flex-col">
@@ -55,7 +57,9 @@
                     class="capitalize input-normal"
                     type="text"
                     name="employeeName"
-                    required
+                    minlength= "2"
+                    maxlength="100"
+                    required="true"
                   />
                 </div>
               </div>
@@ -77,13 +81,15 @@
                 />
               </div>
               <div class="row-input flex-col">
-                <label for="Position">Chức danh</label>
+                <label for="employeePosition">Chức danh</label>
                 <input
                   v-model="employee.employeePosition"
                   class="input-normal"
                   ref="employeePosition"
                   type="text"
-                  name="Position"
+                  name="employeePosition"
+                  minlength="0"
+                  maxlength="255"
                 />
               </div>
             </div>
@@ -154,13 +160,15 @@
               </div>
               <div class="row-input">
                 <div class="EntityCard flex-col">
-                  <label for="EntityCard">Số CMND</label>
+                  <label for="identityNumber">Số CMND</label>
                   <input
                     v-model="employee.identityNumber"
                     ref="identityNumber"
                     class="input-normal"
-                    type="text"
-                    name="EntityCard"
+                    type="number"
+                    name="identityNumber"
+                    minlength="10"
+                    maxlength="12"
                   />
                 </div>
                 <div class="DateSupply flex-col" id="picker_identitydate">
@@ -203,90 +211,105 @@
                 </div>
               </div>
               <div class="row-input flex-col">
-                <label for="AddressSuplly">Nơi cấp</label>
+                <label for="identityPlace">Nơi cấp</label>
                 <input
                   v-model="employee.identityPlace"
                   ref="identityPlace"
                   class="input-normal"
                   type="text"
-                  name="AddressSuplly"
+                  name="identityPlace"
+                  minlength="0"
+                  maxlength="255"
                 />
               </div>
             </div>
           </div>
           <div class="form-content-bottom">
             <div class="row-input flex-col">
-              <label for="Address">Địa chỉ</label>
+              <label for="addresss">Địa chỉ</label>
               <input
                 v-model="employee.address"
                 class="input-normal"
                 ref="addresss"
                 type="text"
-                name="Address"
+                name="addresss"
+                minlength="0"
+                maxlength="255"
               />
             </div>
             <div class="row-input">
               <div class="PhoneNumber div-normal">
-                <label for="PhoneNumber">ĐT di động</label>
+                <label for="phoneNumber">ĐT di động</label>
                 <input
                   v-model="employee.phoneNumber"
                   class="input-normal"
                   ref="phoneNumber"
                   type="number"
-                  name="PhoneNumber"
+                  name="phoneNumber"
+                  minlength="10"
+                  maxlength="13"
                 />
               </div>
               <div class="TelephoneNumber div-normal">
-                <label for="TelephoneNumber">ĐT cố định</label>
+                <label for="telephoneNumber">ĐT cố định</label>
                 <input
                   v-model="employee.telephoneNumber"
                   class="input-normal"
                   ref="telephoneNumber"
                   type="number"
-                  name="TelephoneNumber"
+                  name="telephoneNumber"
+                  minlength="10"
+                  maxlength="13"
                 />
               </div>
               <div class="Email div-normal">
-                <label for="Email">Email</label>
+                <label for="email">Email</label>
                 <input
                   v-model="employee.email"
                   class="input-normal"
                   ref="email"
                   type="email"
-                  name="Email"
+                  name="email"
+                  minlength="0"
+                  maxlength="50"
                 />
               </div>
             </div>
             <div class="row-input">
               <div class="BankAccountNumber div-normal">
-                <label for="BankAccountNumber">Tài khoản ngân hàng</label>
+                <label for="bankAccountNumber">Tài khoản ngân hàng</label>
                 <input
                   v-model="employee.bankAccountNumber"
                   class="input-normal"
                   ref="bankAccountNumber"
                   type="number"
-                  name="BankAccountNumber"
+                  name="bankAccountNumber"
+                  minlength="0"
+                  maxlength="20"
                 />
               </div>
               <div class="BankName div-normal">
-                <label for="BankName">Tên ngân hàng</label>
+                <label for="bankName">Tên ngân hàng</label>
                 <input
                   v-model="employee.bankName"
                   class="input-normal"
                   ref="bankName"
                   type="text"
-                  name="BankName"
+                  name="bankName"
+                  minlength="0"
+                  maxlength="255"
                 />
               </div>
               <div class="BankBranchName div-normal">
-                <label for="BankBranchName">Tên chi nhánh</label>
+                <label for="bankBranchName">Tên chi nhánh</label>
                 <input
                   v-model="employee.bankBranchName"
                   class="input-normal"
                   ref="bankBranchName"
                   type="text"
-                  name="BankBranchName"
-                  maxlength="10"
+                  name="bankBranchName"
+                  minlength="0"
+                  maxlength="255"
                 />
               </div>
             </div>
@@ -330,7 +353,6 @@
 const axios = require("axios");
 import Combobox from "./Combobox.vue";
 import EventBus from "./../main.js";
-import $ from "jquery";
 export default {
   data() {
     return {
@@ -469,6 +491,7 @@ export default {
       this.showDateOfBirth = false;
       this.resetForm();
       this.increaseCode();
+      EventBus.$emit("focusInputSearch");
     },
 
     // kiểm tra xem dữ liệu đã thay đổi hay chưa, nếu đã thay đổi thì hiện message thông báo,
@@ -561,7 +584,7 @@ export default {
       let employeeCode = employee.employeeCode.toUpperCase();
       // chèn thêm số 0 vào trước số mã nhân viên nếu mã chưa đủ 8 kí tự
       employeeCode =
-        employeeCode.substring(0, 2) + employeeCode.substr(2).padStart(5, "0");
+        employeeCode.substring(0, 3) + employeeCode.substr(3).padStart(5, "0");
       employee.employeeCode = employeeCode;
       return employee;
     },
@@ -662,10 +685,18 @@ export default {
     checkInputRequired() {
       let check = true;
       let me = this;
-      $("input[required]").each(function () {
+      document.querySelectorAll("input[required]").forEach(function (el) {
         if (check) {
-          if (!$(this).val()) {
-            me.fieldMissingData = $(this).attr("name");
+          // if (!$(this).val()) {
+          //   me.fieldMissingData = $(this).attr("name");
+          //   me.messageContent =
+          //     me.convertToVNese(me.fieldMissingData) +
+          //     " không được phép để trống.";
+          //   me.focusAndSelectAll(me.fieldMissingData);
+          //   check = false;
+          // }
+          if(!el.value){
+             me.fieldMissingData = el.getAttribute("name");
             me.messageContent =
               me.convertToVNese(me.fieldMissingData) +
               " không được phép để trống.";
@@ -686,10 +717,30 @@ export default {
           return "Họ tên";
         case "departmentName":
           return "Đơn vị";
+        case "employeePosition":
+          return "Chức danh";
         case "dateOfBirth":
           return "Ngày sinh";
+        case "identityNumber":
+          return "Số CMND";
         case "identityDate":
           return "Ngày cấp";
+        case "identityPlace":
+          return "Nơi cấp";
+        case "address":
+          return "Địa chỉ";
+        case "phoneNumber":
+          return "ĐT di động";
+        case "telephoneNumber":
+          return "ĐT cố định";
+        case "email":
+          return "Email";
+        case "bankAccountNumber":
+          return "Số tài khoản";
+        case "bankName":
+          return "Tên ngân hàng";
+        case "branchName":
+          return "Tên chi nhánh";
         default:
           return "";
       }
@@ -697,25 +748,14 @@ export default {
 
     // hàm validate object trước khi thực hiện lưu
     validateObject() {
-      $('.input-normal').each(function(){
-        var maxlength = $(this).attr('maxlength');
-        console.log(maxlength);
-      });
       let me = this;
       // validate mã nhân viên
       var code_regex = /^NV-/i;
       var obligatory = "NV-";
       let employeeCode = me.employee.employeeCode.trim();
-      let strLength = employeeCode.length;
       var numberCode_regex = /^-?\d+$/;
       me.fieldMissingData = "employeeCode";
-      if (strLength < 4) {
-        me.messageContent = "Mã nhân viên quá ngắn, vui lòng nhập lại";
-        return false;
-      } else if (strLength > 8) {
-        me.messageContent = "Mã nhân viên quá dài, vui lòng nhập lại";
-        return false;
-      } else if (!code_regex.test(employeeCode)) {
+      if (!code_regex.test(employeeCode)) {
         me.messageContent = "Mã nhân viên phải chứa kí tự " + obligatory;
         return false;
       } else {
@@ -730,7 +770,6 @@ export default {
       if (!me.validateDate(me.employee.dateOfBirth)) {
         console.log(me.employee.dateOfBirth);
         me.fieldMissingData = "dateOfBirth";
-        console.log("");
         me.messageContent = "Ngày sinh không hợp lệ, vui lòng nhập lại.";
         return false;
       }
@@ -748,10 +787,27 @@ export default {
         me.messageContent = "Email không hợp lệ, vui lòng nhập lại.";
         return false;
       }
+      var isValid = true;
+      // validate độ dài các input
+      document.getElementsByClassName('input-normal').forEach(function(el){
+        if(isValid){
+          var maxlength = el.getAttribute('maxlength');
+          var minlength = el.getAttribute('minlength');
+          var field = el.getAttribute('name');
+          var value = el.value;
+          if(value.length > 0){
+            let strLength = value.length;
+            if(strLength < minlength || strLength > maxlength){
+              me.fieldMissingData = field;
+              me.messageContent = me.convertToVNese(me.fieldMissingData) + " không hợp lệ, vui lòng nhập lại.";
+              isValid = false;
+              return ;
+            }
+          }
+        }
+      });
 
-      
-
-      return true;
+      return isValid;
     },
 
     // hàm validate email

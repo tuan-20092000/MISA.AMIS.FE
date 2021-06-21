@@ -5,6 +5,7 @@
     @keyup.down.exact="arrowDown()"
     @keydown.ctrl.shift.prevent.stop.exact="addEmployee()"
     @keydown.ctrl.enter.exact="edit()"
+    @keydown.ctrl.shift.enter.exact="cloneEmployee()"
     @click="clickMain($event)"
   >
     <div class="main-title">
@@ -35,7 +36,7 @@
             <input
               id="search-name-id"
               v-model="keySearch"
-              ref="input"
+              ref="inputSearch"
               type="text"
               v-on:keyup.enter="searchKeyWord()"
               @keydown.tab.prevent.stop="edit()"
@@ -351,6 +352,7 @@ const axios = require("axios");
           console.log(res);
           this.loading = false;
           let mode = "Xóa";
+          this.getTotalRecord();
           EventBus.$emit("showSuccessBox", mode);
         })
         .catch((err) => {
@@ -494,6 +496,11 @@ const axios = require("axios");
     EventBus.$on("deleteEmployee", employee => {
       this.deleteEmployee(employee);
     });
+
+    EventBus.$on("focusInputSearch", ()=>{
+      if(this.$refs.inputSearch != undefined)
+        this.$refs.inputSearch.focus();
+    })
   },
 
   
