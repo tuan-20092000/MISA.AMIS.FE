@@ -70,12 +70,7 @@
                 <Combobox
                   :departmentName="employee.departmentName"
                   @selectDepartment="selectDepartment"
-                  :data="[
-                    { text: 'Phòng nhân sự', value: 0 },
-                    { text: 'Phòng kinh doanh', value: 1 },
-                    { text: 'Phòng marketing', value: 2 },
-                    { text: 'Phòng ngoại giao', value: 3 },
-                  ]"
+                  :data="dataCbx"
                   :width="392"
                   :height="32"
                 />
@@ -396,6 +391,13 @@ export default {
       identityDate_PK: null, // ngày sinh để v-model với date picker
 
       loading: false,
+
+      dataCbx: [
+                { text: 'Phòng nhân sự', value: 0 },
+                { text: 'Phòng kinh doanh', value: 1 },
+                { text: 'Phòng marketing', value: 2 },
+                { text: 'Phòng ngoại giao', value: 3 },
+              ]
     };
   },
 
@@ -687,14 +689,6 @@ export default {
       let me = this;
       document.querySelectorAll("input[required]").forEach(function (el) {
         if (check) {
-          // if (!$(this).val()) {
-          //   me.fieldMissingData = $(this).attr("name");
-          //   me.messageContent =
-          //     me.convertToVNese(me.fieldMissingData) +
-          //     " không được phép để trống.";
-          //   me.focusAndSelectAll(me.fieldMissingData);
-          //   check = false;
-          // }
           if(!el.value){
              me.fieldMissingData = el.getAttribute("name");
             me.messageContent =
@@ -766,6 +760,21 @@ export default {
           return false;
         }
       }
+
+      // validate đơn vị
+      var isValidDepartment = false;
+      for(let i=0; i<me.dataCbx.length; i++){
+        if(me.employee.departmentName == me.dataCbx[i].text){
+          isValidDepartment = true;
+        }
+      }
+      if(!isValidDepartment){
+        me.fieldMissingData = "departmentName";
+        me.messageContent =
+            "Đơn vị không hợp lệ, vui lòng nhập lại.";
+          return false;
+      }
+
       // validate ngày sinh
       if (!me.validateDate(me.employee.dateOfBirth)) {
         console.log(me.employee.dateOfBirth);
