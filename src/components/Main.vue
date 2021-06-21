@@ -54,7 +54,15 @@
               src="../Resource/img/refresh.svg"
               alt=""
             />
-            <img src="../Resource/img/excel.svg" alt="" />
+            <export-excel
+              class   = "btn btn-default"
+              :data   = "json_data"
+              :fields = "json_fields"
+              worksheet = "My Worksheet"
+              :fetch = "getAllData"
+              name    = "filename.xls">
+              <img src="../Resource/img/excel.svg" alt="" />
+            </export-excel>
             <img src="../Resource/img/setting.svg" alt="" />
           </div>
         </div>
@@ -247,6 +255,7 @@
 
 <script>
 import EventBus from "./../main.js";
+import excel from 'vue-excel-export';
 const axios = require("axios");
  export default {
   data() {
@@ -271,7 +280,22 @@ const axios = require("axios");
       employee: null,
       keySearch: "",
       loading: true,
-    };
+
+      json_fields:{
+        'Mã nhân viên': 'employeeCode',
+        'Tên nhân viên': 'employeeName',
+        'Giới tính': 'gender',
+        'Ngày sinh': 'dateOfBirth',
+        'Số CMND': 'identityNumber',
+        'Chức danh': 'employeePosition',
+        'Đơn vị': 'departmentName',
+        'Số tài khoản': 'bankAccountNumber',
+        'Tên ngân hàng': 'bankName',
+        'Chi nhánh ngân hàng': 'bankBranchName'
+      },
+
+      json_data: null,
+    }
   },
 
   methods: {
@@ -363,6 +387,33 @@ const axios = require("axios");
             "Có lỗi xảy ra khi xóa bản ghi, vui lòng liên hệ Misa để được trợ giúp.";
           EventBus.$emit("showError", message);
         });
+    },
+
+    async getAllData(){
+      let me = this;
+      // bỏ khoảng trắng 2 đầu 
+      let keySearch = me.keySearch.trim();
+      // axios request
+      await axios
+        .request({
+          method: "post",
+          url:
+            "http://localhost:8080/api/v1/Employees/GetAllData",
+          data: '"' + keySearch + '"',
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          // nếu thành công thì thực hiện gán 
+          me.json_data = res.data;
+        })
+        .catch((err) => {
+          // nếu có lỗi thì hiện thông báo lỗi
+          console.log(err);
+          let message =
+            "Xuất excel thất bại";
+          EventBus.$emit("showError", message);
+        });
+      return me.json_data;
     },
 
     // hàm thêm mới nhân viên
