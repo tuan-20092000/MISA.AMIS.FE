@@ -142,6 +142,12 @@
     display: flex;
 }
 
+.wrap-form input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .wrap-form .flex-col {
     flex-direction: column;
 }
@@ -211,8 +217,8 @@
 }
 
 .wrap-form .Gender label{
-    margin-left: 10px;
-    margin-right: 20px;
+    /* margin-left: 10px; */
+    margin-right: 20px; 
     font-size: 13px;
     font-family: 'notosans-regular';
     font-weight: 400;
@@ -320,7 +326,7 @@
 }
 
 
-/* .label-radion-gender{
+.label-radio-gender{
     display: inline-block;
     position:relative;
     cursor:pointer;
@@ -329,7 +335,7 @@
     padding-left: 27px;
     width: fit-content;
   }
-  .label-radion-gender input {
+  .label-radio-gender input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -347,7 +353,7 @@
     outline: none;
     border: 1px solid #babec5
   }
-   .label-radion-gender:hover .checkmark{
+   .label-radio-gender:hover .checkmark{
     background:#ccc;
   }
   .checkmark:after{
@@ -355,18 +361,18 @@
     position:absolute;
     display:none;
   }
-  .label-radion-gender .checkmark:after{
+  .label-radio-gender .checkmark:after{
     top:51%;
     left:51%;
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
     border-radius:50%;
     border: solid 3px #fff;
     transform:translate(-50%,-50%) rotate(45deg);
   }
-  .label-radion-gender input:checked ~ .checkmark{
+  .label-radio-gender input:checked ~ .checkmark{
     background:green;
   }
-  .label-radion-gender input:checked ~ .checkmark:after{
+  .label-radio-gender input:checked ~ .checkmark:after{
     display:block;
-  } */
+  }

@@ -5,7 +5,6 @@
     @keyup.down.exact="arrowDown()"
     @keydown.ctrl.shift.prevent.stop.exact="addEmployee()"
     @keydown.ctrl.enter.exact="edit()"
-    @keydown.ctrl.shift.enter.exact="cloneEmployee()"
     @click="clickMain($event)"
   >
 
@@ -14,16 +13,7 @@
       <div class="main-title-content">
         <div class="title">Nhân viên</div>
         <div class="main-title-btn">
-          <button class="btn-more">
-            <span style="padding-right:4px;">Tiện ích</span
-            ><img src="../Resource/img/drop_down.svg" alt="" />
-          </button>
-          <button v-on:click="addEmployee()" class="btn-add" title="Thêm (Ctrl + Shift)"><span>Thêm</span></button>
-          <button class="btn-excel">
-            <div class="div-img-drop-down">
-              <img src="../Resource/img/drop_down_white.svg" alt="" />
-            </div>
-          </button>
+          <button v-on:click="addEmployee()" class="btn-add" title="Thêm mới nhân viên (Ctrl + Shift)"><span>Thêm mới nhân viên</span></button>
         </div>
       </div>
     </div>
@@ -67,7 +57,6 @@
               name    = "filename.xls">
               <img src="../Resource/img/excel.svg" alt="" />
             </export-excel>
-            <img src="../Resource/img/setting.svg" alt="" />
           </div>
         </div>
       </div>
@@ -84,32 +73,32 @@
                   <th style="left: 16px" class="check-all" id="check-all">
                     <input type="checkbox" name="" id="" />
                   </th>
-                  <th style="min-width: 150px; width: 150px" id="">
+                  <th class="align-left" style="min-width: 150px; width: 150px" id="">
                     MÃ NHÂN VIÊN
                   </th>
-                  <th style="min-width: 250px; width: 250px" id="">
+                  <th class="align-left" style="min-width: 250px; width: 250px" id="">
                     TÊN NHÂN VIÊN
                   </th>
-                  <th style="min-width: 120px; width: 120px" id="">
+                  <th class="align-left" style="min-width: 120px; width: 120px" id="">
                     GIỚI TÍNH
                   </th>
                   <th style="min-width: 150px; width: 150px" id="">
                     NGÀY SINH
                   </th>
-                  <th style="min-width: 200px; width: 200px" id="">SỐ CMND</th>
-                  <th style="min-width: 250px; width: 250px" id="">
+                  <th class="align-left" style="min-width: 200px; width: 200px" id="">SỐ CMND</th>
+                  <th class="align-left" style="min-width: 250px; width: 250px" id="">
                     CHỨC DANH
                   </th>
-                  <th style="min-width: 250px; width: 250px" id="">
+                  <th class="align-left" style="min-width: 250px; width: 250px" id="">
                     TÊN ĐƠN VỊ
                   </th>
-                  <th style="min-width: 150px; width: 150px" id="">
+                  <th class="align-left" style="min-width: 150px; width: 150px" id="">
                     SỐ TÀI KHOẢN
                   </th>
-                  <th style="min-width: 250px; width: 250px" id="">
+                  <th class="align-left" style="min-width: 250px; width: 250px" id="">
                     TÊN NGÂN HÀNG
                   </th>
-                  <th
+                  <th class="align-left" 
                     style="min-width: 250px; width: 250px; border-right: none"
                     id=""
                   >
@@ -497,7 +486,7 @@ const axios = require("axios");
     // sự kiện ấn mũi tên xuống
     // Createdby TuanNV (18/6/2021)
     arrowDown() {
-      if(this.selectedRow < this.countEmployeePerPage)
+      if(this.selectedRow < this.countEmployeePerPage -1)
         this.selectedRow = this.selectedRow + 1;
     },
 

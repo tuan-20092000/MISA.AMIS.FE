@@ -148,7 +148,7 @@ export default {
             this.error = true;
             this.field = field;
             setTimeout(() =>
-                this.error = false, 2500
+                this.cancelErrorBox(), 2500
             )
         },
 

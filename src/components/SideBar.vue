@@ -9,26 +9,32 @@
       />
     </div>
     <div class="menu-item">
-      <div class="item">
-        <div class="item-icon">
-          <img class="icon" src="../Resource/img/sumary.svg" alt="" />
+      <router-link to="/">
+        <div class="item">
+          <div class="item-icon">
+            <img class="icon" src="../Resource/img/sumary.svg" alt="" />
+          </div>
+          <div class="item-title">Tổng quan</div>
         </div>
-        <router-link to="/"><div class="item-title">Tổng quan</div></router-link>
-      </div>
+      </router-link>
 
-      <div class="item">
-        <div class="item-icon">
-          <img class="icon" src="../Resource/img/cash.svg" alt="" />
+      <router-link to="/home">
+        <div class="item">
+          <div class="item-icon">
+            <img class="icon" src="../Resource/img/cash.svg" alt="" />
+          </div>
+          <div class="item-title">Tiền mặt</div>
         </div>
-        <router-link to="/home"><div class="item-title">Tiền mặt</div></router-link>
-      </div>
+      </router-link>
 
+      <router-link to="/keepmoney">
       <div class="item">
         <div class="item-icon">
           <img class="icon" src="../Resource/img/keepmoney.svg" alt="" />
         </div>
-        <router-link to="/keepmoney"><div class="item-title">Tiền gửi</div></router-link>
+        <div class="item-title">Tiền gửi</div>
       </div>
+      </router-link>
 
       <div class="item">
         <div class="item-icon">

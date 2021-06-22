@@ -7,8 +7,8 @@
                 class=".input-cbx"
                 @blur="handleBlur($event)"
                 @focus="focusInput()"
-                v-on:input="search()" ref="departmentName"
-                name="departmentName"
+                v-on:input="search()" ref="DepartmentName"
+                name="DepartmentName"
                 autocomplete="off"
                 required ="true">
             <div class="combo-select-show" v-on:click = "toggleSelect()">
@@ -131,7 +131,7 @@ export default {
             this.isShow=!this.isShow;
             if(this.$el.getElementsByClassName("row-current")[0] != undefined)
                 this.$el.getElementsByClassName("row-current")[0].classList.remove("row-current");
-            this.$refs.departmentName.focus();
+            this.$refs.DepartmentName.focus();
         },
 
         // hàm xử lý khi nhấn enter
@@ -285,7 +285,7 @@ export default {
         // Createdby TuanNV (18/6/2021)
         handleBlur(e){  
             this.$el.firstElementChild.classList.remove("active");
-            // this.hideForm();
+            this.hideForm();
             if(this.selectValue.text == null || this.selectValue.text==""){
                 this.valid = false;
                 this.$el.firstElementChild.setAttribute("title", 'Trường này không được để trống');

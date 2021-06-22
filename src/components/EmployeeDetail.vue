@@ -44,9 +44,9 @@
                     id="employeeCode"
                     @blur="handleBlur($event)"
                     class="uppercase input-normal"
-                    ref="employeeCode"
+                    ref="EmployeeCode"
                     type="text"
-                    name="employeeCode"
+                    name="EmployeeCode"
                     minlength="4"
                     maxlength="8"
                     required="true"
@@ -55,17 +55,17 @@
 
                 <!-- input họ tên -->
                 <div class="employeeName flex-col">
-                  <label for="employeeName"
+                  <label for="EmployeeName"
                     >Tên<span style="color: red"> *</span></label
                   >
                   <input
                     v-model="employee.employeeName"
                     @blur="handleBlur($event)"
                     id="employeeName"
-                    ref="employeeName"
+                    ref="EmployeeName"
                     class="capitalize input-normal"
                     type="text"
-                    name="employeeName"
+                    name="EmployeeName"
                     minlength= "2"
                     maxlength="100"
                     required="true"
@@ -75,7 +75,7 @@
 
               <!-- input tên đơn vị -->
               <div class="row-input flex-col">
-                <label for="departmentName"
+                <label for="DepartmentName"
                   >Đơn vị<span style="color: red"> *</span></label
                 >
                 <Combobox
@@ -89,13 +89,13 @@
 
               <!-- input chức danh nhân viên -->
               <div class="row-input flex-col">
-                <label for="employeePosition">Chức danh</label>
+                <label for="EmployeePosition">Chức danh</label>
                 <input
                   v-model="employee.employeePosition"
                   class="input-normal"
-                  ref="employeePosition"
+                  ref="EmployeePosition"
                   type="text"
-                  name="employeePosition"
+                  name="EmployeePosition"
                   minlength="0"
                   maxlength="255"
                 />
@@ -112,7 +112,7 @@
                       v-model="employee.dateOfBirth"
                       type="text"
                       name="DateOfBirth"
-                      ref="dateOfBirth"
+                      ref="DateOfBirth"
                       autocomplete="off"
                     />
                     <div
@@ -142,7 +142,7 @@
                   <div class="label-gender" style="line-height: 16px">
                     Giới tính
                   </div>
-                  <div class="radio-gender">
+                  <!-- <div class="radio-gender">
                     <input
                       v-model="employee.gender"
                       type="radio"
@@ -167,6 +167,20 @@
                       value="2"
                     />
                     <label for="other">Khác</label>
+                  </div> -->
+                  <div class="radio-gender">
+                    <label class="label-radio-gender">Nam
+                      <input v-model="employee.gender" type="radio" name="radio" value="0">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="label-radio-gender">Nữ
+                      <input v-model="employee.gender" type="radio" name="radio" value="1">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="label-radio-gender">Khác
+                      <input v-model="employee.gender" type="radio" name="radio" value="2">
+                      <span class="checkmark"></span>
+                    </label>
                   </div>
                 </div>
               </div>
@@ -174,13 +188,13 @@
               <!-- input số CMND -->
               <div class="row-input">
                 <div class="EntityCard flex-col">
-                  <label for="identityNumber">Số CMND</label>
+                  <label for="IdentityNumber">Số CMND</label>
                   <input
                     v-model="employee.identityNumber"
-                    ref="identityNumber"
+                    ref="IdentityNumber"
                     class="input-normal"
                     type="number"
-                    name="identityNumber"
+                    name="IdentityNumber"
                     minlength="10"
                     maxlength="12"
                   />
@@ -188,13 +202,13 @@
 
                 <!-- input ngày cấp -->
                 <div class="DateSupply flex-col" id="picker_identitydate">
-                  <label for="identitydate">Ngày cấp</label>
+                  <label for="IdentityDate">Ngày cấp</label>
                   <div class="input-date" style="margin-top: 5px">
                     <input
                       v-model="employee.identityDate"
                       type="text"
-                      name="identitydate"
-                      ref="identityDate"
+                      name="IdentityDate"
+                      ref="IdentityDate"
                       autocomplete="off"
                     />
                     <div
@@ -229,13 +243,13 @@
 
               <!-- input nơi cấp CMND -->
               <div class="row-input flex-col">
-                <label for="identityPlace">Nơi cấp</label>
+                <label for="IdentityPlace">Nơi cấp</label>
                 <input
                   v-model="employee.identityPlace"
-                  ref="identityPlace"
+                  ref="IdentityPlace"
                   class="input-normal"
                   type="text"
-                  name="identityPlace"
+                  name="IdentityPlace"
                   minlength="0"
                   maxlength="255"
                 />
@@ -261,13 +275,13 @@
             <!-- input ĐT di động -->
             <div class="row-input">
               <div class="PhoneNumber div-normal">
-                <label for="phoneNumber">ĐT di động</label>
+                <label for="PhoneNumber">ĐT di động</label>
                 <input
                   v-model="employee.phoneNumber"
                   class="input-normal"
-                  ref="phoneNumber"
+                  ref="PhoneNumber"
                   type="number"
-                  name="phoneNumber"
+                  name="PhoneNumber"
                   minlength="10"
                   maxlength="13"
                 />
@@ -275,13 +289,13 @@
 
               <!-- input ĐT cố định -->
               <div class="TelephoneNumber div-normal">
-                <label for="telephoneNumber">ĐT cố định</label>
+                <label for="TelephoneNumber">ĐT cố định</label>
                 <input
                   v-model="employee.telephoneNumber"
                   class="input-normal"
-                  ref="telephoneNumber"
+                  ref="TelephoneNumber"
                   type="number"
-                  name="telephoneNumber"
+                  name="TelephoneNumber"
                   minlength="10"
                   maxlength="13"
                 />
@@ -293,9 +307,9 @@
                 <input
                   v-model="employee.email"
                   class="input-normal"
-                  ref="email"
+                  ref="Email"
                   type="email"
-                  name="email"
+                  name="Email"
                   minlength="0"
                   maxlength="50"
                 />
@@ -312,20 +326,20 @@
                   ref="bankAccountNumber"
                   type="number"
                   name="bankAccountNumber"
-                  minlength="0"
+                  minlength="10"
                   maxlength="20"
                 />
               </div>
 
               <!-- input tên ngân hàng -->
               <div class="BankName div-normal">
-                <label for="bankName">Tên ngân hàng</label>
+                <label for="BankName">Tên ngân hàng</label>
                 <input
                   v-model="employee.bankName"
                   class="input-normal"
-                  ref="bankName"
+                  ref="BankName"
                   type="text"
-                  name="bankName"
+                  name="BankName"
                   minlength="0"
                   maxlength="255"
                 />
@@ -333,13 +347,13 @@
 
               <!-- input tên chi nhánh -->
               <div class="BankBranchName div-normal">
-                <label for="bankBranchName">Tên chi nhánh</label>
+                <label for="BankBranchName">Tên chi nhánh</label>
                 <input
                   v-model="employee.bankBranchName"
                   class="input-normal"
-                  ref="bankBranchName"
+                  ref="BankBranchName"
                   type="text"
-                  name="bankBranchName"
+                  name="BankBranchName"
                   minlength="0"
                   maxlength="255"
                 />
@@ -368,6 +382,7 @@
             class="btn-saveAndadd btn-secondary"
             title="Cất và Thêm (Ctrl + Shift + S)"
             ref="saveAndAdd"
+            
           >
             Cất và Thêm
           </button>
@@ -400,22 +415,22 @@ export default {
 
       // thông tin nhân viên binding lên form
       employee: {
-        employeeCode: null,
-        employeeName: null,
+        employeeCode: "",
+        employeeName: "",
         gender: 0,
-        dateOfBirth: null,
-        departmentName: null,
-        identityDate: null,
-        identityPlace: null,
-        employeePosition: null,
-        address: null,
-        bankAccountNumber: null,
-        bankName: null,
-        bankBranchName: null,
-        bankProvinceName: null,
-        phoneNumber: null,
-        telephoneNumber: null,
-        email: null,
+        dateOfBirth: "",
+        departmentName: "",
+        identityDate: "",
+        identityPlace: "",
+        employeePosition: "",
+        address: "",
+        bankAccountNumber: "",
+        bankName: "",
+        bankBranchName: "",
+        bankProvinceName: "",
+        phoneNumber: "",
+        telephoneNumber: "",
+        email: "",
       },
 
       cEmployee: null, // clone employee để ktra xem dữ liệu thay đổi hay không
@@ -461,68 +476,68 @@ export default {
     // hàm focus và bôi đen text trong input nếu có
     // Createdby TuanNV (18/6/2021)
     focusAndSelectAll(index) {
-      if (!index || index == "employeeCode") {
+      if (!index || index == "EmployeeCode") {
         this.$nextTick(function () {
-          if (this.$refs.employeeCode != undefined) {
-            this.$refs.employeeCode.focus();
-            this.$refs.employeeCode.select();
+          if (this.$refs.EmployeeCode != undefined) {
+            this.$refs.EmployeeCode.focus();
+            this.$refs.EmployeeCode.select();
           }
         });
       } else {
         switch (index) {
-          case "employeeName":
+          case "EmployeeName":
             this.$nextTick(function () {
-              if (this.$refs.employeeName != undefined) {
-                this.$refs.employeeName.focus();
-                this.$refs.employeeName.select();
+              if (this.$refs.EmployeeName != undefined) {
+                this.$refs.EmployeeName.focus();
+                this.$refs.EmployeeName.select();
               }
             });
             return;
-          case "dateOfBirth":
+          case "DateOfBirth":
             this.$nextTick(function () {
-              if (this.$refs.dateOfBirth != undefined) {
-                this.$refs.dateOfBirth.focus();
-                this.$refs.dateOfBirth.select();
+              if (this.$refs.DateOfBirth != undefined) {
+                this.$refs.DateOfBirth.focus();
+                this.$refs.DateOfBirth.select();
               }
             });
             return;
-          case "identityDate":
+          case "IdentityDate":
             this.$nextTick(function () {
-              if (this.$refs.identityDate != undefined) {
-                this.$refs.identityDate.focus();
-                this.$refs.identityDate.select();
+              if (this.$refs.IdentityDate != undefined) {
+                this.$refs.IdentityDate.focus();
+                this.$refs.IdentityDate.select();
               }
             });
             return;
-          case "departmentName":
+          case "DepartmentName":
             this.$nextTick(function () {
               if (this.$children[0] != undefined) {
-                this.$children[0].$refs.departmentName.focus();
-                this.$children[0].$refs.departmentName.select();
+                this.$children[0].$refs.DepartmentName.focus();
+                this.$children[0].$refs.DepartmentName.select();
               }
             });
             return;
-          case "email":
+          case "Email":
             this.$nextTick(function () {
-              if (this.$refs.email != undefined) {
-                this.$refs.email.focus();
-                this.$refs.email.select();
+              if (this.$refs.Email != undefined) {
+                this.$refs.Email.focus();
+                this.$refs.Email.select();
               }
             });
             return;
-          case "phoneNumber":
+          case "PhoneNumber":
             this.$nextTick(function () {
-              if (this.$refs.phoneNumber != undefined) {
-                this.$refs.phoneNumber.focus();
-                this.$refs.phoneNumber.select();
+              if (this.$refs.PhoneNumber != undefined) {
+                this.$refs.PhoneNumber.focus();
+                this.$refs.PhoneNumber.select();
               }
             });
             return;
-          case "telephoneNumber":
+          case "TelephoneNumber":
             this.$nextTick(function () {
-              if (this.$refs.telephoneNumber != undefined) {
-                this.$refs.telephoneNumber.focus();
-                this.$refs.telephoneNumber.select();
+              if (this.$refs.TelephoneNumber != undefined) {
+                this.$refs.TelephoneNumber.focus();
+                this.$refs.TelephoneNumber.select();
               }
             });
             return;
@@ -559,22 +574,22 @@ export default {
     resetForm() {
       // null employee
       let nullEmployee = {
-        employeeCode: null,
-        employeeName: null,
+        employeeCode: "",
+        employeeName: "",
         gender: 0,
-        dateOfBirth: null,
-        departmentName: null,
-        identityDate: null,
-        identityPlace: null,
-        employeePosition: null,
-        address: null,
-        bankAccountNumber: null,
-        bankName: null,
-        bankBranchName: null,
-        bankProvinceName: null,
-        phoneNumber: null,
-        telephoneNumber: null,
-        email: null,
+        dateOfBirth: "",
+        departmentName: "",
+        identityDate: "",
+        identityPlace: "",
+        employeePosition: "",
+        address: "",
+        bankAccountNumber: "",
+        bankName: "",
+        bankBranchName: "",
+        bankProvinceName: "",
+        phoneNumber: "",
+        telephoneNumber: "",
+        email: "",
       };
       this.employee = nullEmployee;
       this.$children[0].selectValue = {};
@@ -679,13 +694,13 @@ export default {
             this.loading = false;
             let message = error.response.data.messengers[0],
               field = error.response.data.eFieldError;
+            console.log(field);
             EventBus.$emit("showError", message, field);
           });
       }
 
       // trường hợp chỉnh sửa
       else if (me.formMode == "edit") {
-        console.log(employee);
         // let url = "https//localhost:8080/api/v1/Employees";
         axios
           .put("http://localhost:8080/api/v1/Employees", employee)
@@ -759,35 +774,35 @@ export default {
     // Createdby TuanNV (18/6/2021)
     convertToVNese(fieldName) {
       switch (fieldName) {
-        case "employeeCode":
+        case "EmployeeCode":
           return "Mã nhân viên";
-        case "employeeName":
+        case "EmployeeName":
           return "Họ tên";
-        case "departmentName":
+        case "DepartmentName":
           return "Đơn vị";
-        case "employeePosition":
+        case "EmployeePosition":
           return "Chức danh";
-        case "dateOfBirth":
+        case "DateOfBirth":
           return "Ngày sinh";
-        case "identityNumber":
+        case "IdentityNumber":
           return "Số CMND";
-        case "identityDate":
+        case "IdentityDate":
           return "Ngày cấp";
-        case "identityPlace":
+        case "IdentityPlace":
           return "Nơi cấp";
-        case "address":
+        case "Address":
           return "Địa chỉ";
-        case "phoneNumber":
+        case "PhoneNumber":
           return "ĐT di động";
-        case "telephoneNumber":
+        case "TelephoneNumber":
           return "ĐT cố định";
-        case "email":
+        case "Email":
           return "Email";
-        case "bankAccountNumber":
+        case "BankAccountNumber":
           return "Số tài khoản";
-        case "bankName":
+        case "BankName":
           return "Tên ngân hàng";
-        case "branchName":
+        case "BranchName":
           return "Tên chi nhánh";
         default:
           return "";
@@ -803,7 +818,7 @@ export default {
       var obligatory = "NV-";
       let employeeCode = me.employee.employeeCode.trim();
       var numberCode_regex = /^-?\d+$/;
-      me.fieldMissingData = "employeeCode";
+      me.fieldMissingData = "EmployeeCode";
       if (!code_regex.test(employeeCode)) {
         me.messageContent = "Mã nhân viên phải chứa kí tự " + obligatory;
         return false;
@@ -824,7 +839,7 @@ export default {
         }
       }
       if(!isValidDepartment){
-        me.fieldMissingData = "departmentName";
+        me.fieldMissingData = "DepartmentName";
         me.messageContent =
             "Đơn vị không hợp lệ, vui lòng nhập lại.";
           return false;
@@ -832,22 +847,21 @@ export default {
 
       // validate ngày sinh
       if (!me.validateDate(me.employee.dateOfBirth)) {
-        console.log(me.employee.dateOfBirth);
-        me.fieldMissingData = "dateOfBirth";
+        me.fieldMissingData = "DateOfBirth";
         me.messageContent = "Ngày sinh không hợp lệ, vui lòng nhập lại.";
         return false;
       }
 
       // validate ngày cấp
       if (!me.validateDate(me.employee.identityDate)) {
-        me.fieldMissingData = "identityDate";
+        me.fieldMissingData = "IdentityDate";
         me.messageContent = "Ngày cung cấp không hợp lệ, vui lòng nhập lại.";
         return false;
       }
 
       // validate email
       if (!me.validateEmail(me.employee.email)) {
-        me.fieldMissingData = "email";
+        me.fieldMissingData = "Email";
         me.messageContent = "Email không hợp lệ, vui lòng nhập lại.";
         return false;
       }
@@ -914,7 +928,7 @@ export default {
     // sự kiện khi ấn tab
     // Createdby TuanNV (18/6/2021)
     tab() {
-      this.$refs.employeeCode.focus();
+      this.$refs.EmployeeCode.focus();
     },
 
     // sự kiện khi ấn shift tab

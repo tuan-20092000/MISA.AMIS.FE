@@ -228,6 +228,10 @@
   position: sticky !important;
 }
 
+.align-left {
+  text-align: left;
+}
+
 .out-left-white{
   padding: 0px !important;
   margin: 0px !important;
@@ -352,4 +356,13 @@
 
 .wrap-paging ul li:last-child{
   margin-left: 13px;
+}
+
+.div-select-count .v-text-field.v-text-field--solo .v-input__append-inner, 
+.v-text-field.v-text-field--solo .v-input__prepend-inner{
+  margin-top: -2px !important;
+}
+
+.div-select-count .v-select__selection--comma{
+  margin: 4px 12px 7px 0px !important;
 }
