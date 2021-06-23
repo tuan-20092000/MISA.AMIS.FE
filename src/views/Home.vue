@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Main from "../components/Main.vue";
+import Main from "../components/layout/the-maincontent/the-maincontent.vue";
 export default {
   name: "Home",
 
@@ -17,5 +17,5 @@ export default {
 
 
 <style src="../css/app.css"></style>
-<style src="../css/googlefont.css"></style>
+<style src="../components/common/common_css/googlefont.css"></style>
 

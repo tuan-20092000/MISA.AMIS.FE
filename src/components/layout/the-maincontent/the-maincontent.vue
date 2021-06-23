@@ -1,10 +1,6 @@
 <template>
   <div
     class="main"
-    @keyup.up.exact="arrowUp()"
-    @keyup.down.exact="arrowDown()"
-    @keydown.ctrl.shift.prevent.stop.exact="addEmployee()"
-    @keydown.ctrl.enter.exact="edit()"
     @click="clickMain($event)"
   >
 
@@ -13,17 +9,16 @@
       <div class="main-title-content">
         <div class="title">Nhân viên</div>
         <div class="main-title-btn">
-          <button v-on:click="addEmployee()" class="btn-add" title="Thêm mới nhân viên (Ctrl + Shift)"><span>Thêm mới nhân viên</span></button>
+          <button v-on:click="addEmployee()" class="btn-add" title="Thêm mới (F1)"><span>Thêm mới nhân viên</span></button>
         </div>
       </div>
     </div>
 
     <!-- controller -->
-    <div class="layout">
+    <div class="layout" id="layout-scroll">
       <div class="grid">
-        <div class="excution">
-          <span>Thực hiện hàng loạt</span>
-          <img src="../Resource/img/drop_down.svg" alt="" />
+        <div class="l_excution">
+          
         </div>
         <div class="right-control">
           <div class="search-name-id">
@@ -35,17 +30,16 @@
               v-on:keyup.enter="searchKeyWord()"
               @keydown.tab.prevent.stop="edit()"
               placeholder="Tìm theo mã, tên nhân viên"
-              autofocus
               autocomplete="off"
             />
             <div style="background-color: #fff;width:32px;32px;">
-              <img src="../Resource/img/find.svg" alt="search" />
+              <img src="../../../Resource/img/find.svg" alt="search" />
             </div>
           </div>
           <div class="three-btn">
             <img
               v-on:click="refresh()"
-              src="../Resource/img/refresh.svg"
+              src="../../../Resource/img/refresh.svg"
               alt=""
             />
             <export-excel
@@ -55,7 +49,7 @@
               worksheet = "My Worksheet"
               :fetch = "getAllData"
               name    = "filename.xls">
-              <img src="../Resource/img/excel.svg" alt="" />
+              <img src="../../../Resource/img/excel.svg" alt="" />
             </export-excel>
           </div>
         </div>
@@ -172,7 +166,7 @@
                       <span v-on:click="edit(index)">Sửa</span>
                       <div class="div-more-icon">
                         <img
-                          src="../Resource/img/more.svg"
+                          src="../../../Resource/img/more.svg"
                           alt=""
                           @click="showMoreOption($event, index)"
                         />
@@ -246,14 +240,14 @@
     </div>
     <div v-if="loading" class="wrap-loading">
         <div class="loading" style="width:fit-content;height:32px;">
-          <img style="" src="../Resource/loading.svg" alt="">
+          <img style="" src="../../../Resource/img/loading.svg" alt="">
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import EventBus from "./../main.js";
+import EventBus from "../../../main.js";
 const axios = require("axios");
  export default {
   data() {
@@ -278,6 +272,7 @@ const axios = require("axios");
       employee: null, // thông tin nhân viên
       keySearch: "", // từ khóa tìm kiếm
       loading: true, // ẩn hiện loading
+      formDetail: false, // trạng thái hiện tại form detail (ẩn hoặc hiện)
 
       // header excel export
       json_fields:{
@@ -386,9 +381,9 @@ const axios = require("axios");
           // nếu có lỗi xảy ra thì hiện thông báo lỗi
           this.loading = false;
           console.log(err);
-          let message =
-            "Có lỗi xảy ra khi xóa bản ghi, vui lòng liên hệ Misa để được trợ giúp.";
-          EventBus.$emit("showError", message);
+          // let message =
+          //   "Có lỗi xảy ra khi xóa bản ghi, vui lòng liên hệ Misa để được trợ giúp.";
+          // EventBus.$emit("showError", message);
         });
     },
 
@@ -425,6 +420,7 @@ const axios = require("axios");
     // Createdby TuanNV (18/6/2021)
     addEmployee(){
       EventBus.$emit("addEmployee");
+      this.formDetail = true;
     },
 
     // sự kiện khi ấn vào các hàng
@@ -486,15 +482,43 @@ const axios = require("axios");
     // sự kiện ấn mũi tên xuống
     // Createdby TuanNV (18/6/2021)
     arrowDown() {
-      if(this.selectedRow < this.countEmployeePerPage -1)
+      if(this.selectedRow < this.countEmployeePerPage -1){
         this.selectedRow = this.selectedRow + 1;
+        document.getElementById("layout-scroll").scrollTop += 47;
+      }
     },
 
     // sự kiện ấn mũi tên lên
     // Createdby TuanNV (18/6/2021)
     arrowUp(){
-      if(this.selectedRow > 0)
+      if(this.selectedRow > 0){
         this.selectedRow = this.selectedRow - 1;
+        document.getElementById("layout-scroll").scrollTop -= 47;
+      }
+    },
+
+    // quay lại page trước
+    // CreatedBy TuanNV (20/6/2021)
+    prevPage(){
+      let me = this;
+      if(me.selectedPage > 1){
+        me.selectedPage --;
+        me.getDataServer();
+        me.selectedRow = 0;
+        document.getElementById("layout-scroll").scrollTop = 0;
+      }
+    },
+
+    // next sang page tiếp theo
+    // CreatedBy TuanNV (20/6/2021)
+    nextPage(){
+      let me = this;
+      if(me.selectedPage < me.countPage){
+        me.selectedPage ++;
+        me.getDataServer();
+        me.selectedRow = 0;
+        document.getElementById("layout-scroll").scrollTop = 0;
+      }
     },
 
     // show form cảnh báo trước khi xóa
@@ -559,20 +583,83 @@ const axios = require("axios");
   },
 
   mounted() {
+    let me = this;
     //hàm lắng nghe sự kiện khi các component khác gọi loadData
+    // Createdby TuanNV (18/6/2021)
     EventBus.$on("loadDataServer", () => {
-      this.getTotalRecord();
+      me.getTotalRecord();
     });
 
     // lắng nghe sự kiên xóa nhân viên
+    // Createdby TuanNV (18/6/2021)
     EventBus.$on("deleteEmployee", employee => {
-      this.deleteEmployee(employee);
+      me.deleteEmployee(employee);
     });
 
-    // lắng nghe sự kiến focus vào input tìm kiếm
-    EventBus.$on("focusInputSearch", ()=>{
-      if(this.$refs.inputSearch != undefined)
-        this.$refs.inputSearch.focus();
+    EventBus.$on("hideFormDetail", ()=>{
+      me.formDetail = false;
+    })
+
+    // lắng nghe sự kiện ấn các phím
+    // Createdby TuanNV (18/6/2021)
+    document.addEventListener("keydown", function (event){
+      if(!me.formDetail){
+        // ấn mũi tên lên
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "ArrowUp"){
+          event.preventDefault();
+          me.arrowUp();
+        }
+
+        // ấn mũi tên xuống
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "ArrowDown"){
+          event.preventDefault();
+          me.arrowDown();
+        }
+
+        // ấn mũi tên sang trái
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "ArrowLeft"){
+          // event.preventDefault();
+          me.prevPage();
+        }
+
+        // ấn mũi tên sang phải
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "ArrowRight"){
+          // event.preventDefault();
+          me.nextPage();
+        }
+
+        // ấn F1 thì xuất hiện form thêm mới
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "F1"){
+          event.preventDefault();
+          me.addEmployee();
+        }
+
+        // ấn F2 thì xuất hiện form edit
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "F2"){
+          event.preventDefault();
+          me.edit();
+        }
+
+        // ấn F3 thì xuất hiện message box cảnh báo trước khi xóa
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "F3"){
+          event.preventDefault();
+          me.showWarning();
+        }
+
+        // ấn F4 thì clone nhân viên đang được chọn
+        // Createdby TuanNV (18/6/2021)
+        if(event.code == "F4"){
+          event.preventDefault();
+          me.cloneEmployee();
+        }
+      }
     })
   },
 
@@ -580,6 +667,5 @@ const axios = require("axios");
 };
 </script>
 
-<style src="../css/googlefont.css"></style>
-<style src="../css/main.css"></style>
-<style src="../css/table.css"></style>
+<style src="../../common/common_css/googlefont.css"></style>
+<style src="./the-maincontent.css"></style>

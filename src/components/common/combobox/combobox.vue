@@ -12,7 +12,7 @@
                 autocomplete="off"
                 required ="true">
             <div class="combo-select-show" v-on:click = "toggleSelect()">
-                <img src="../Resource/img/expland-more-small.svg" alt="">
+                <img src="../../../Resource/img/expland-more-small.svg" alt="">
             </div>
         </div>
         <div class="selected-list-combo-box" :class="{'selection-show':isShow,}" id = 'combo-box-data' :style="widthLength">
@@ -20,7 +20,7 @@
             v-on:click = "select(item)" :class="{'item-selected': selectValue.text == item.text, 'row-current':index == rowMarked}">
                 <div class="ticker-icon">
                 <div class="icon-wrap" :class="{'selection-show': item.text == selectValue.text}">
-                    <img src="../Resource/img/done.svg" alt="">
+                    <img src="../../../Resource/img/done.svg" alt="">
                 </div>
                 </div>
                 <div class="select-text">
@@ -285,7 +285,7 @@ export default {
         // Createdby TuanNV (18/6/2021)
         handleBlur(e){  
             this.$el.firstElementChild.classList.remove("active");
-            this.hideForm();
+            // this.hideForm();
             if(this.selectValue.text == null || this.selectValue.text==""){
                 this.valid = false;
                 this.$el.firstElementChild.setAttribute("title", 'Trường này không được để trống');
@@ -305,86 +305,5 @@ export default {
 }
 </script>
 
-<style scoped>
-    *{
-        padding: 0;
-        margin: 0;
-    }
-    
-    .combo-box-wrap{
-        margin-top: 5px;
-        display: flex;
-        border: 1px solid #babec5;
-        align-items: center;
-        box-sizing: border-box;
-        justify-content: center;
-    }
-    .selection-show{
-        display: block !important;  
-    }
-    .no-data{
-        border: 1px solid #FF0000;
-    }
-    .combo-box-wrap input[type="text"]{
-        margin-top: 0px;
-        height: 100%;
-        border: none;
-        outline: 0;
-        width: 100%;
-        padding: 6px 10px;
-        font-size:13px ;
-    }
-    .combo-box-wrap .combo-select-show{
-        width: 32px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    .combo-box-wrap .combo-select-show:hover{
-        background-color: #ebedf0;
-    }
-
-    .selected-list-combo-box{
-        text-align: left;
-        border: 1px solid #babec5;
-        display: none;
-        border-top:none;
-        z-index: 10000;
-        position: absolute;
-        box-sizing: border-box;
-        background-color: #fff;
-    }
-    .selected-list-combo-box .combo-selection{
-        padding: 5px;
-        display: flex;
-        align-items: center;
-    }
-    .selected-list-combo-box .combo-selection:hover{
-        color: #35bf22;
-        background-color: #ebedf0;
-    }
-    .item-selected{
-        color: #35bf22;
-        background-color: #ebedf0;
-    }
-    .row-current{
-        background: #ebedf0 !important ;
-    }
-    .active{
-        border: 1px solid #2ca01c !important;
-    }
-    .ticker-icon{
-        height: 100%;
-        width: 30px;
-    }
-    .icon-wrap{
-        display: none;
-    }
-    .select-text{
-        width: 100%;
-        text-align: left;
-    }
-</style>
+<style scoped src="./combobox.css"> </style>
+<style src="../common_css/googlefont.css"></style>

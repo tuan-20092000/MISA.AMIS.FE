@@ -326,7 +326,7 @@ input::-webkit-inner-spin-button {
 }
 
 
-.label-radio-gender{
+/* .label-radio-gender{
     display: inline-block;
     position:relative;
     cursor:pointer;
@@ -375,4 +375,67 @@ input::-webkit-inner-spin-button {
   }
   .label-radio-gender input:checked ~ .checkmark:after{
     display:block;
+  } */
+
+  
+  .radio-gender .label-radio-gender {
+    display: flex;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 13px;
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    align-items: center;
+  }
+  .radio-gender  .label-radio-gender input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .radio-gender .label-radio-gender input:focus ~ .checkmark{
+      border: 1px solid #000 !important;
+      width: 18px;
+      height: 18px;
+  }
+  .radio-gender .checkmark {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 18px;
+    width: 18px;
+    background-color: #ffffff;
+    border: 1px solid #afafaf;
+    border-radius: 50%;
+  }
+ 
+  .radio-gender .label-radio-gender:hover input ~ .checkmark {
+    background-color: #ffffff;
+  }
+  
+  .radio-gender .label-radio-gender input:checked ~ .checkmark {
+    background-color: #ffffff;
+    border:1px solid #2ca01c;
+  }
+  
+  .radio-gender .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .radio-gender  .label-radio-gender input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .radio-gender .label-radio-gender .checkmark:after {
+    top: 3px;
+      left: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2ca01c;
   }

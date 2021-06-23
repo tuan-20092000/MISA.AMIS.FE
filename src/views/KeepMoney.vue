@@ -1,12 +1,12 @@
 <template>
   <div class="keep-money">
-      <img src="../Resource/baotri.jpg" alt="">
+      <img src="../Resource/img/baotri.jpg" alt="">
   </div>
 </template>
 
 <script>
 export default {
-    // name: "KeepMoney",
+    
 }
 </script>
 

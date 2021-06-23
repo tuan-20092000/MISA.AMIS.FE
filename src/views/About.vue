@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <img src="../Resource/vuetify.png" alt="">
+    <img src="../Resource/img/vuetify.png" alt="">
   </div>
 </template>
 

@@ -11,9 +11,9 @@
     <!-- button help and cancel form -->
     <div class="form-detail" id="form-detail">
       <div class="div-tool">
-        <img src="../Resource/img/support.svg" alt="" title="Giúp (F1)" />
+        <img src="../../Resource/img/support.svg" alt="" title="Giúp (F1)" />
         <div class="inline" v-on:click="preCancelForm()">
-          <img src="../Resource/img/x.svg" alt="" title="Đóng (ESC)" />
+          <img src="../../Resource/img/x.svg" alt="" title="Đóng (ESC)" />
         </div>
       </div>
 
@@ -66,8 +66,6 @@
                     class="capitalize input-normal"
                     type="text"
                     name="EmployeeName"
-                    minlength= "2"
-                    maxlength="100"
                     required="true"
                   />
                 </div>
@@ -96,8 +94,6 @@
                   ref="EmployeePosition"
                   type="text"
                   name="EmployeePosition"
-                  minlength="0"
-                  maxlength="255"
                 />
               </div>
             </div>
@@ -119,7 +115,7 @@
                       @click="() => {showDateOfBirth = !showDateOfBirth;}"
                       class="div-icon-datepicker"
                     >
-                      <img src="../Resource/img/date_picker.svg" alt="" />
+                      <img src="../../Resource/img/date_picker.svg" alt="" />
                     </div>
                   </div>
                   <div v-if="showDateOfBirth" class="date__picker">
@@ -142,32 +138,6 @@
                   <div class="label-gender" style="line-height: 16px">
                     Giới tính
                   </div>
-                  <!-- <div class="radio-gender">
-                    <input
-                      v-model="employee.gender"
-                      type="radio"
-                      name="Gender"
-                      id="male"
-                      value="0"
-                    />
-                    <label for="male">Nam</label>
-                    <input
-                      v-model="employee.gender"
-                      type="radio"
-                      name="Gender"
-                      id="female"
-                      value="1"
-                    />
-                    <label for="female">Nữ</label>
-                    <input
-                      v-model="employee.gender"
-                      type="radio"
-                      name="Gender"
-                      id="other"
-                      value="2"
-                    />
-                    <label for="other">Khác</label>
-                  </div> -->
                   <div class="radio-gender">
                     <label class="label-radio-gender">Nam
                       <input v-model="employee.gender" type="radio" name="radio" value="0">
@@ -195,8 +165,6 @@
                     class="input-normal"
                     type="number"
                     name="IdentityNumber"
-                    minlength="10"
-                    maxlength="12"
                   />
                 </div>
 
@@ -215,7 +183,7 @@
                       @click="() => {showIdentityDate = !showIdentityDate;}"
                       class="div-icon-datepicker"
                     >
-                      <img src="../Resource/img/date_picker.svg" alt="" />
+                      <img src="../../Resource/img/date_picker.svg" alt="" />
                     </div>
                   </div>
                   <div
@@ -250,8 +218,6 @@
                   class="input-normal"
                   type="text"
                   name="IdentityPlace"
-                  minlength="0"
-                  maxlength="255"
                 />
               </div>
             </div>
@@ -267,8 +233,6 @@
                 ref="addresss"
                 type="text"
                 name="addresss"
-                minlength="0"
-                maxlength="255"
               />
             </div>
 
@@ -282,8 +246,6 @@
                   ref="PhoneNumber"
                   type="number"
                   name="PhoneNumber"
-                  minlength="10"
-                  maxlength="13"
                 />
               </div>
 
@@ -296,8 +258,6 @@
                   ref="TelephoneNumber"
                   type="number"
                   name="TelephoneNumber"
-                  minlength="10"
-                  maxlength="13"
                 />
               </div>
 
@@ -310,8 +270,6 @@
                   ref="Email"
                   type="email"
                   name="Email"
-                  minlength="0"
-                  maxlength="50"
                 />
               </div>
             </div>
@@ -326,8 +284,6 @@
                   ref="bankAccountNumber"
                   type="number"
                   name="bankAccountNumber"
-                  minlength="10"
-                  maxlength="20"
                 />
               </div>
 
@@ -340,8 +296,6 @@
                   ref="BankName"
                   type="text"
                   name="BankName"
-                  minlength="0"
-                  maxlength="255"
                 />
               </div>
 
@@ -354,8 +308,6 @@
                   ref="BankBranchName"
                   type="text"
                   name="BankBranchName"
-                  minlength="0"
-                  maxlength="255"
                 />
               </div>
             </div>
@@ -394,7 +346,7 @@
     <!-- div loading -->
     <div v-if="loading" class="wrap-loading">
       <div class="loading" style="width: fit-content; height: 32px">
-        <img style="" src="../Resource/loading.svg" alt="" />
+        <img style="" src="../../Resource/img/loading.svg" alt="" />
       </div>
     </div>
   </div>
@@ -402,8 +354,8 @@
 
 <script>
 const axios = require("axios");
-import Combobox from "./Combobox.vue";
-import EventBus from "./../main.js";
+import Combobox from "../common/combobox/combobox.vue";
+import EventBus from "../../main.js";
 export default {
   data() {
     return {
@@ -447,6 +399,7 @@ export default {
       identityDate_PK: null, // ngày sinh để v-model với date picker
 
       loading: false, // ẩn hiện loading
+
 
       // dữ liệu truyền vào combobox
       dataCbx: [
@@ -553,7 +506,7 @@ export default {
       this.showDateOfBirth = false;
       this.resetForm();
       this.increaseCode();
-      EventBus.$emit("focusInputSearch");
+      EventBus.$emit("hideFormDetail");
     },
 
     // kiểm tra xem dữ liệu đã thay đổi hay chưa, nếu đã thay đổi thì hiện message thông báo,
@@ -684,6 +637,7 @@ export default {
               await me.increaseCode();
               me.loading = false;
               me.focusAndSelectAll();
+              me.cEmployee = {...me.employee}
             }
             // hiện thông báo thành công
             EventBus.$emit("showSuccessBox", mode);
@@ -719,6 +673,7 @@ export default {
               await me.increaseCode();
               this.loading = false;
               me.focusAndSelectAll();
+              me.cEmployee = {...me.employee}
             }
             // hiện thông báo thành công
             EventBus.$emit("showSuccessBox", mode);
@@ -819,10 +774,26 @@ export default {
       let employeeCode = me.employee.employeeCode.trim();
       var numberCode_regex = /^-?\d+$/;
       me.fieldMissingData = "EmployeeCode";
-      if (!code_regex.test(employeeCode)) {
+      // trường hợp mã nhân viên ít hơn 4 kí tự
+      if(employeeCode.length < 4){
+        me.messageContent = "Mã nhân viên quá ngắn, vui lòng nhập lại.";
+        return false;
+      }
+
+      // trường hợp mã nhân viên lớn hơn 8 kí tự
+      else if(employeeCode.length > 8){
+        me.messageContent = "Mã nhân viên quá dài, vui lòng nhập lại.";
+        return false;
+      }
+
+      // trường hợp mã nhân viên không chứa kí tự bắt buộc
+      else if (!code_regex.test(employeeCode)) {
         me.messageContent = "Mã nhân viên phải chứa kí tự " + obligatory;
         return false;
-      } else {
+      } 
+      
+      // trường hợp mã nhân viên không đúng định dạng
+      else {
         let numberInCode = employeeCode.substr(3);
         if (!numberCode_regex.test(numberInCode)) {
           me.messageContent =
@@ -865,27 +836,8 @@ export default {
         me.messageContent = "Email không hợp lệ, vui lòng nhập lại.";
         return false;
       }
-      var isValid = true;
-      // validate độ dài các input
-      document.getElementsByClassName('input-normal').forEach(function(el){
-        if(isValid){
-          var maxlength = el.getAttribute('maxlength');
-          var minlength = el.getAttribute('minlength');
-          var field = el.getAttribute('name');
-          var value = el.value;
-          if(value.length > 0){
-            let strLength = value.length;
-            if(strLength < minlength || strLength > maxlength){
-              me.fieldMissingData = field;
-              me.messageContent = me.convertToVNese(me.fieldMissingData) + " không hợp lệ, vui lòng nhập lại.";
-              isValid = false;
-              return ;
-            }
-          }
-        }
-      });
 
-      return isValid;
+      return true;
     },
 
     // hàm validate email
@@ -1071,5 +1023,5 @@ export default {
 };
 </script>
 
-<style scope src="../css/employeedetail.css"></style>
-<style src="../css/googlefont.css"></style>
+<style scope src="./employee_detail.css"></style>
+<style src="../common/common_css/googlefont.css"></style>

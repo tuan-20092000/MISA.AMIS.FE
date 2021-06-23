@@ -1,0 +1,73 @@
+.wrap-message-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+    
+  .wrap-message-form .message-box {
+    background-color: #fff;
+    width: 444px;
+    height: 200px;
+    padding: 32px;
+  }
+  
+  .container-box .space{
+    border-bottom: 1px solid #8d9096;
+    margin-bottom: 20px;
+  }
+  
+  .message-box .mess-footer{
+    position: relative;
+    height: 36px;
+  }
+  
+  .container-box .btn-ok{
+    border: 1px solid transparent;
+    height: 35px;
+    padding: 8px 20px;
+    background-color: #2ca01c;
+    color: #fff;
+    float: right;
+    border-radius: 3px;
+  }
+  
+  .container-box .btn-ok:hover{
+    background-color: #35bf22;
+  }
+  
+  .container-box .btn-ok:active{
+    background-color: #248b15;
+  }
+  
+ 
+  .message-box .btn:focus{
+    border: 1px solid #000;
+  }
+  
+  .success-box{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 350px;
+    height: 150px;
+    background-color: #fff;
+    z-index: 1000;
+    border: 1px solid #c7c7c7;
+    padding: 20px ;
+  }
+  
+  .container-box .success-content{
+    padding-left: 20px;
+    font-size: 16px;
+    font-family: 'notosans-bold';
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }

@@ -1,0 +1,81 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.combo-box-wrap{
+    margin-top: 5px;
+    display: flex;
+    border: 1px solid #babec5;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+}
+.selection-show{
+    display: block !important;  
+}
+.no-data{
+    border: 1px solid #FF0000;
+}
+.combo-box-wrap input[type="text"]{
+    margin-top: 0px;
+    height: 100%;
+    border: none;
+    outline: 0;
+    width: 100%;
+    padding: 6px 10px;
+    font-size:13px ;
+}
+.combo-box-wrap .combo-select-show{
+    width: 32px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.combo-box-wrap .combo-select-show:hover{
+    background-color: #ebedf0;
+}
+
+.selected-list-combo-box{
+    text-align: left;
+    border: 1px solid #babec5;
+    display: none;
+    border-top:none;
+    z-index: 10000;
+    position: absolute;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.selected-list-combo-box .combo-selection{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+.selected-list-combo-box .combo-selection:hover{
+    color: #35bf22;
+    background-color: #ebedf0;
+}
+.item-selected{
+    color: #35bf22;
+    background-color: #ebedf0;
+}
+.row-current{
+    background: #ebedf0 !important ;
+}
+.active{
+    border: 1px solid #2ca01c !important;
+}
+.ticker-icon{
+    height: 100%;
+    width: 30px;
+}
+.icon-wrap{
+    display: none;
+}
+.select-text{
+    width: 100%;
+    text-align: left;
+}

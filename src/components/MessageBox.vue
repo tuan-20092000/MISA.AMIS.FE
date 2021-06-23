@@ -210,4 +210,5 @@ export default {
 </script>
 
 <style src="../css/messagebox.css"></style>
-<style src="../css/googlefont.css"></style>
+
+
